@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./components/Product.css";
-import Product from "./components/Product.js";
-import ProductDetails from "./components/ProductDetails.js";
+import Product from "./components/Product.jsx";
+import ProductDetails from "./components/ProductDetails.jsx";
 import data from "./data/data";
 import Logo from "./components/Logo";
 
