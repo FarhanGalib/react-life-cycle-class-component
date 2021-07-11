@@ -1,0 +1,88 @@
+.product-list{
+    padding: 15px;
+    border-bottom: 1px solid gray;
+}
+.product-list:hover{
+    background-color: rgb(230, 52, 52);
+    cursor: pointer;
+    color: white;
+}
+.product-details{
+    padding: 15px;
+}
+.product-details > button{
+    cursor: pointer;
+    width: 80px;
+    padding: 5px;
+    color: white;
+    background-color: rgb(230, 52, 52);
+    border: 2px solid rgb(230, 52, 52);
+    border-radius: 15px;
+    transition: .3s ease;
+}
+.product-details > button:hover {
+    background-color: rgb(230, 52, 52);
+    color: white;
+    box-shadow: 2px 2px 2px gray;
+
+}
+
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    align-content: center;
+  }
+  
+  .flex {
+    min-height: 60pt;
+  }
+  
+  @keyframes loading {
+    0% {
+      width: 50pt;
+      height: 50pt;
+      margin-top: 0;
+    }
+    25% {
+      height: 4pt;
+      margin-top: 23pt;
+    }
+    50% {
+      width: 4pt;
+    }
+    75% {
+      width: 50pt;
+    }
+    100% {
+      width: 50pt;
+      height: 50pt;
+      margin-top: 0;
+    }
+  }
+  
+  .loader {
+    width: 50pt;
+    height: 50pt;
+    border-radius: 100%;
+    border: #6767fa 4pt solid;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: transparent;
+    animation: loading 1s infinite;
+  }
+  
+  .load-text {
+    padding-top: 15px;
+    text-align: center;
+    font: 14pt "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: lighten(#6767fa, 75%);
+  }

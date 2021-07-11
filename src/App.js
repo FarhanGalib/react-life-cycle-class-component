@@ -1,25 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./components/Product.css";
+import Product from "./components/Product.js";
+import ProductDetails from "./components/ProductDetails.js";
+import data from "./data/data";
+import Logo from "./components/Logo";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    state = {
+        products: data,
+        currentProduct: null,
+        logo: true,
+    };
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ ...this.state, logo: false });
+        }, 1500);
+    }
+
+    componentDidUpdate() {
+        
+    }
+
+    handleOnClickOnProduct = (product) => {
+        this.setState({ ...this.state, currentProduct: product });
+        this.logoLoader();
+    };
+
+    handleOnClickBackBtn = () => {
+        this.setState({ ...this.state, currentProduct: null });
+        this.logoLoader();
+    };
+
+    logoLoader = () => {
+        this.setState((prevState) => ({ logo: !prevState.logo }));
+    };
+
+    logoUnloader = () => {
+        this.setState((prevState) => ({ logo: !prevState.logo }));
+    };
+
+    render() {
+        return (
+            <div>
+                {this.state.logo ? (
+                    <Logo/>
+                ) : !this.state.currentProduct ? (
+                    <Product
+                        products={this.state.products}
+                        handleOnClickOnProduct={this.handleOnClickOnProduct}
+                        logoUnloader={this.logoUnloader}
+                    />
+                ) : (
+                    <ProductDetails
+                        product={this.state.currentProduct}
+                        handleOnClickBackBtn={this.handleOnClickBackBtn}
+                        logoUnloader={this.logoUnloader}
+                    />
+                )}
+            </div>
+        );
+    }
 }
 
 export default App;
