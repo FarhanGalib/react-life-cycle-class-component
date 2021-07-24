@@ -1,46 +1,36 @@
-import React, { Component } from "react";
-import "./components/Product.css";
-import Product from "./components/Product.jsx";
-import ProductDetails from "./components/ProductDetails.jsx";
+import { useState } from "react";
+import "./App.css";
+import Products from "./components/Products";
 import data from "./data/data";
+import ProductDetails from "./components/ProductDetails";
 
-////
-class App extends Component {
-    state = {
-        products: data,
-        currentProduct: null,
+
+function App() {
+    const [products, setProducts] = useState(data);
+    const [currentProduct, setCurrentProduct] = useState(null);
+
+    const handleOnClickOnProduct = (pd) => {
+        setCurrentProduct(pd);
+    };
+    const handleOnClickOnBackBtn = () => {
+        setCurrentProduct(null);
     };
 
-    handleOnClickOnProduct = (product) => {
-        this.setState({ ...this.state, currentProduct: product });
-        
-    };
-
-    handleOnClickBackBtn = () => {
-        this.setState({ ...this.state, currentProduct: null });
-       
-    };
-
-
-    render() {
-        return (
-            <div>
-                { !this.state.currentProduct ? (
-                    <Product
-                        products={this.state.products}
-                        handleOnClickOnProduct={this.handleOnClickOnProduct}
-                        
-                    />
-                ) : (
-                    <ProductDetails
-                        product={this.state.currentProduct}
-                        handleOnClickBackBtn={this.handleOnClickBackBtn}
-                        
-                    />
-                )}
-            </div>
-        );
-    }
+    return (
+        <div>
+            {!currentProduct ? (
+                <Products
+                    products={products}
+                    handleOnClickOnProduct={handleOnClickOnProduct}
+                ></Products>
+            ) : (
+                <ProductDetails
+                    currentProduct={currentProduct}
+                    handleOnClickOnBackBtn={handleOnClickOnBackBtn}
+                ></ProductDetails>
+            )}
+        </div>
+    );
 }
 
 export default App;
