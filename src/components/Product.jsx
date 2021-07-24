@@ -1,37 +1,36 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
-import "./Product.css";
 
-class Product extends Component {
-    state = { logo: true };
-    componentDidMount() {
-        setTimeout(() => this.setState({ logo: false }), 1000);
-    }
+const Products = ({ products, handleOnClickOnProduct }) => {
+    const [logo, setLogo] = useState(true);
+    useEffect(() => {
+        setTimeout(() => setLogo(false), 1000);
+    }, []);
 
-    render() {
-        const { products, handleOnClickOnProduct } = this.props;
+    return (
+        <>
+            {logo ? (
+                <Logo></Logo>
+            ) : (
+                <div>
+                    {products.map((pd) => (
+                        <div
+                            className="product-list"
+                            onClick={() => handleOnClickOnProduct(pd)}
+                            key={pd.key}
+                        >
+                            <h4>{pd.name}</h4>
+                            <p>
+                                <big>
+                                    <b>$ {pd.price}</b>
+                                </big>
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </>
+    );
+};
 
-        return (
-            <>
-                {this.state.logo ? (
-                    <Logo></Logo>
-                ) : (
-                    <div>
-                        {products.map((pd) => (
-                            <div
-                                className="product-list"
-                                key={pd.key}
-                                onClick={() => handleOnClickOnProduct(pd)}
-                            >
-                                <h4>{pd.name}</h4>
-                                <p>$ {pd.price}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </>
-        );
-    }
-}
-
-export default Product;
+export default Products;
