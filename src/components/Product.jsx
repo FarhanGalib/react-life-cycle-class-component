@@ -1,29 +1,35 @@
 import React, { Component } from "react";
+import Logo from "./Logo";
 import "./Product.css";
 
 class Product extends Component {
-    componentWillUnmount() {
-        setTimeout(() => {
-            this.props.logoUnloader();
-        }, 1500);
+    state = { logo: true };
+    componentDidMount() {
+        setTimeout(() => this.setState({ logo: false }), 1000);
     }
 
     render() {
         const { products, handleOnClickOnProduct } = this.props;
 
         return (
-            <div>
-                {products.map((pd) => (
-                    <div
-                        className="product-list"
-                        key={pd.key}
-                        onClick={() => handleOnClickOnProduct(pd)}
-                    >
-                        <h4>{pd.name}</h4>
-                        <p>$ {pd.price}</p>
+            <>
+                {this.state.logo ? (
+                    <Logo></Logo>
+                ) : (
+                    <div>
+                        {products.map((pd) => (
+                            <div
+                                className="product-list"
+                                key={pd.key}
+                                onClick={() => handleOnClickOnProduct(pd)}
+                            >
+                                <h4>{pd.name}</h4>
+                                <p>$ {pd.price}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                )}
+            </>
         );
     }
 }
