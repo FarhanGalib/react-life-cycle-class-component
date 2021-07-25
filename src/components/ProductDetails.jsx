@@ -1,37 +1,32 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
-import "./Product.css";
 
-class ProductDetails extends Component {
-    state = { logo: true };
-    componentDidMount() {
-        setTimeout(() => this.setState({ logo: false }), 1000);
-    }
-    render() {
-        const { product, handleOnClickBackBtn } = this.props;
+const ProductDetails = ({
+    currentProduct,
+    handleOnClickOnBackBtn
+}) => {
+    const [logo, setLogo] = useState(true);
+    useEffect(() => {
+        setTimeout(() =>setLogo(false),1000);
+    }, []);
+    return (
+        <>
+            {logo ? (
+                <Logo></Logo>
+            ) : (
+                <div className="product-details">
+                    <h4>{currentProduct?.name}</h4>
+                    <p>category: {currentProduct?.category}</p>
+                    <p>available: {currentProduct?.stock}</p>
+                    <p>
+                        <b>$ {currentProduct?.price}</b>
+                    </p>
+                    <br />
+                    <button onClick={handleOnClickOnBackBtn}>Back</button>
+                </div>
+            )}
+        </>
+    );
+};
 
-        return (
-            <>
-                {this.state.logo ? (
-                    <Logo></Logo>
-                ) : (
-                    <div className="product-details">
-                        <h4>{product?.name}</h4>
-                        <p>
-                            <b>$ {product?.price}</b>
-                        </p>
-                        <p>
-                            <small>Category: {product?.category}</small>
-                        </p>
-                        <p>
-                            <small>Available: {product?.stock}</small>
-                        </p>
-                        <button onClick={handleOnClickBackBtn}>Go Back</button>
-                    </div>
-                )}
-            </>
-        );
-    }
-}
-
-export default React.memo(ProductDetails);
+export default ProductDetails;
