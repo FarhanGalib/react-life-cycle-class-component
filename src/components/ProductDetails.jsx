@@ -1,14 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
+import { useParams, useHistory } from "react-router-dom";
+import data from "../data/data";
 
-const ProductDetails = ({
-    currentProduct,
-    handleOnClickOnBackBtn
-}) => {
+const ProductDetails = ({products}) => {
+
+    const [currentProduct, setCurrentProduct] = useState();
     const [logo, setLogo] = useState(true);
+    const {key} = useParams();
+    const history= useHistory();
+
     useEffect(() => {
-        setTimeout(() =>setLogo(false),1000);
+        setCurrentProduct(products.find(p => p.key === key));
+        setTimeout(() => setLogo(false), 1000);
+
     }, []);
+    
+    const handleBackButton= () => {   
+        history.push("/");
+    };
+
+    
     return (
         <>
             {logo ? (
@@ -22,7 +34,7 @@ const ProductDetails = ({
                         <b>$ {currentProduct?.price}</b>
                     </p>
                     <br />
-                    <button onClick={handleOnClickOnBackBtn}>Back</button>
+                    <button onClick={handleBackButton}>Back</button>
                 </div>
             )}
         </>
