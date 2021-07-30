@@ -140,3 +140,15 @@
   text-decoration: none;
   color: black;
 }
+
+.not-found{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-top: 120px;
+}
+.not-found p{
+  font-size: 70px;
+  font-weight: 500;
+}

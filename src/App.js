@@ -3,7 +3,7 @@ import "./App.css";
 import Products from "./components/Products";
 import data from "./data/data";
 import ProductDetails from "./components/ProductDetails";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NotFound from "./components/NotFound";
 
 function App() {

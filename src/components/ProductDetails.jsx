@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Logo from "./Logo";
 import { useParams, useHistory } from "react-router-dom";
-import data from "../data/data";
+
 
 const ProductDetails = ({products}) => {
 
